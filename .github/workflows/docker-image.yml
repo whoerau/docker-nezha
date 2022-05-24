@@ -36,7 +36,7 @@ jobs:
           file: dashboard/Dockerfile
           platforms: linux/amd64, linux/arm64
           push: true
-          tags: whoer/nezha-dashboard:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/nezha-dashboard:latest
           
   build-agent-image:
     runs-on: ubuntu-latest
@@ -64,4 +64,4 @@ jobs:
           file: agent/Dockerfile
           platforms: linux/amd64, linux/arm64
           push: true
-          tags: whoer/nezha-agent:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/nezha-agent:latest
