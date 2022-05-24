@@ -29,14 +29,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
-        name: Build and push nezha-agent
+        name: Build and push nezha-dashboard
         uses: docker/build-push-action@v3
         with:
-          context: agent
-          file: agent/Dockerfile
+          context: dashboard
+          file: dashboard/Dockerfile
           platforms: linux/amd64, linux/arm64
           push: true
-          tags: whoer/nezha-agent:latest
+          tags: whoer/nezha-dashboard:latest
           
   build-agent-image:
     runs-on: ubuntu-latest
