@@ -4,12 +4,21 @@ RUN apk --no-cache --no-progress add \
 
 ENV GO111MODULE=on
 ARG VERSION
+ARG architecture
 WORKDIR /home
+
+RUN architecture=""
+case $(uname -m) in
+    i386)   architecture="386" ;;
+    i686)   architecture="386" ;;
+    x86_64) architecture="amd64" ;;
+    arm)    dpkg --print-architecture | grep -q "arm64" && architecture="arm64" || architecture="arm" ;;
+esac
 
 RUN git clone https://github.com/naiba/nezha.git &&\
     cd nezha && VERSION=$(git describe --tags `git rev-list --tags --max-count=1`) && ERSION=${VERSION:1} &&\
     git checkout $VERSION &&\
-    cd cmd/agent && go build -o nezha-agent -trimpath -ldflags="-s -w -X main.version=$ERSION"
+    cd cmd/agent && go build -o nezha-agent -trimpath -ldflags="-s -w -X main.version=$ERSION -X main.arch=$architecture"
 
 
 FROM alpine:latest
