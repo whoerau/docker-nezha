@@ -3,6 +3,7 @@ RUN apk --no-cache --no-progress add \
     gcc git musl-dev
 
 ENV GO111MODULE=on
+ENV CGO_ENABLED=0
 ARG VERSION
 ARG architecture
 WORKDIR /home
