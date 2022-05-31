@@ -9,7 +9,7 @@ WORKDIR /home
 RUN git clone https://github.com/naiba/nezha.git &&\
     cd nezha && VERSION=$(git describe --tags `git rev-list --tags --max-count=1`) && ERSION=${VERSION:1} &&\
     git checkout $VERSION &&\
-    cd cmd/agent && go build -o app -trimpath -ldflags="-s -w -X main.version=$ERSION"
+    cd cmd/agent && go build -o nezha-agent -trimpath -ldflags="-s -w -X main.version=$ERSION"
 
 
 FROM alpine:latest
@@ -25,4 +25,4 @@ COPY --from=binarybuilder /home/nezha/cmd/agent/app ./app
 
 USER nobody
 
-ENTRYPOINT ["/agent/app", "--skip-procs", "--disable-command-execute", "--report-delay", "3"]
+ENTRYPOINT ["/agent/nezha-agent", "--skip-procs", "--disable-command-execute", "--report-delay", "3"]
