@@ -22,6 +22,12 @@ jobs:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
+      - 
+        name: Get Latest Tag Of Upstream Source Code
+        id: download
+        run: |
+          VERSION=$(curl --silent "https://api.github.com/repos/naiba/nezha/releases" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g')
+          echo ::set-output name=latest_tag::${VERSION}
       -
         name: Login to DockerHub
         uses: docker/login-action@v2
@@ -36,7 +42,7 @@ jobs:
           file: dashboard/Dockerfile
           platforms: linux/amd64, linux/arm64
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/nezha-dashboard:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/nezha-dashboard:latest, ${{ secrets.DOCKERHUB_USERNAME }}/nezha-dashboard:${{ steps.download.outputs.latest_tag }}
           
   build-agent-image:
     runs-on: ubuntu-latest
@@ -50,6 +56,12 @@ jobs:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
+      - 
+        name: Get Latest Tag Of Upstream Source Code
+        id: download
+        run: |
+          VERSION=$(curl --silent "https://api.github.com/repos/naiba/nezha/releases" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g')
+          echo ::set-output name=latest_tag::${VERSION}
       -
         name: Login to DockerHub
         uses: docker/login-action@v2
@@ -64,4 +76,4 @@ jobs:
           file: agent/Dockerfile
           platforms: linux/amd64, linux/arm64
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/nezha-agent:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/nezha-agent:latest, ${{ secrets.DOCKERHUB_USERNAME }}/nezha-agent:${{ steps.download.outputs.latest_tag }}
