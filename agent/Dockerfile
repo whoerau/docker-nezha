@@ -8,8 +8,7 @@ ARG version
 ARG architecture
 WORKDIR /home
 
-RUN architecture="" \
-    case $(uname -m) in \
+RUN case $(uname -m) in \
         i386)   architecture="386" ;; \
         i686)   architecture="386" ;; \
         x86_64) architecture="amd64" ;; \
