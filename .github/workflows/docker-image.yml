@@ -27,7 +27,7 @@ jobs:
         id: download
         run: |
           VERSION=$(curl --silent "https://api.github.com/repos/naiba/nezha/releases" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g')
-          echo ::set-output name=latest_tag::${VERSION}
+          echo ::set-output name=latest_tag::${VERSION:1}
       -
         name: Login to DockerHub
         uses: docker/login-action@v2
@@ -61,7 +61,7 @@ jobs:
         id: download
         run: |
           VERSION=$(curl --silent "https://api.github.com/repos/naiba/nezha/releases" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g')
-          echo ::set-output name=latest_tag::${VERSION}
+          echo ::set-output name=latest_tag::${VERSION:1}
       -
         name: Login to DockerHub
         uses: docker/login-action@v2
