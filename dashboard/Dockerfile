@@ -15,7 +15,9 @@ FROM alpine:latest
 RUN apk --no-cache --no-progress add \
     ca-certificates \
     tzdata
-RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' >/etc/timezone
+
+ENV TZ="Asia/Shanghai"
+RUN cp "/usr/share/zoneinfo/$TZ" /etc/localtime && echo "$TZ" > /etc/timezone 
 
 WORKDIR /dashboard
 COPY --from=binarybuilder /home/nezha/resource ./resource
