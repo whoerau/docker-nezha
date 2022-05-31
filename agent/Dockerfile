@@ -4,7 +4,7 @@ RUN apk --no-cache --no-progress add \
 
 ENV GO111MODULE=on
 ENV CGO_ENABLED=0
-ARG VERSION
+ARG version
 ARG architecture
 WORKDIR /home
 
@@ -17,9 +17,9 @@ case $(uname -m) in
 esac
 
 RUN git clone https://github.com/naiba/nezha.git &&\
-    cd nezha && VERSION=$(git describe --tags `git rev-list --tags --max-count=1`) && ERSION=${VERSION:1} &&\
-    git checkout $VERSION &&\
-    cd cmd/agent && go build -o nezha-agent -trimpath -ldflags="-s -w -X main.version=$ERSION -X main.arch=$architecture"
+    cd nezha && version=$(git describe --tags `git rev-list --tags --max-count=1`) &&\
+    git checkout $version &&\
+    cd cmd/agent && go build -o nezha-agent -trimpath -ldflags="-s -w -X main.version=${version:1} -X main.arch=$architecture"
 
 
 FROM alpine:latest
