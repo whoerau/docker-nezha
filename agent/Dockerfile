@@ -8,13 +8,13 @@ ARG version
 ARG architecture
 WORKDIR /home
 
-RUN architecture=""
-case $(uname -m) in
-    i386)   architecture="386" ;;
-    i686)   architecture="386" ;;
-    x86_64) architecture="amd64" ;;
-    arm)    dpkg --print-architecture | grep -q "arm64" && architecture="arm64" || architecture="arm" ;;
-esac
+RUN architecture="" \
+    case $(uname -m) in \
+        i386)   architecture="386" ;; \
+        i686)   architecture="386" ;; \
+        x86_64) architecture="amd64" ;; \
+        arm)    dpkg --print-architecture | grep -q "arm64" && architecture="arm64" || architecture="arm" ;; \
+    esac
 
 RUN git clone https://github.com/naiba/nezha.git &&\
     cd nezha && version=$(git describe --tags `git rev-list --tags --max-count=1`) &&\
