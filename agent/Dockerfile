@@ -25,6 +25,6 @@ RUN cp "/usr/share/zoneinfo/$TZ" /etc/localtime && echo "$TZ" > /etc/timezone
 WORKDIR /agent
 COPY --from=binarybuilder /home/nezha/cmd/agent/nezha-agent ./nezha-agent
 
-USER nobody
+# USER nobody
 
 ENTRYPOINT ["/agent/nezha-agent", "--skip-procs", "--disable-command-execute", "--report-delay", "3"]
