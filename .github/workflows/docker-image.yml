@@ -60,6 +60,13 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v2
+      - 
+        name: Checkout upstream repo 
+        uses: actions/checkout@v2
+        with:
+          repository: naiba/nezha
+          path: upstream
+          submodules: recursive
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
