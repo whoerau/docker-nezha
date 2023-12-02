@@ -52,8 +52,8 @@ jobs:
           file: dashboard/Dockerfile
           platforms: linux/amd64, linux/arm64
           push: true
-          # tags: ${{ secrets.DOCKERHUB_USERNAME }}/nezha-dashboard:latest, ${{ secrets.DOCKERHUB_USERNAME }}/nezha-dashboard:${{ steps.download.outputs.latest_tag }}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/nezha-dashboard:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/nezha-dashboard:latest, ${{ secrets.DOCKERHUB_USERNAME }}/nezha-dashboard:${{ steps.download.outputs.latest_tag }}
+          #tags: ${{ secrets.DOCKERHUB_USERNAME }}/nezha-dashboard:latest
           
   build-agent-image:
     runs-on: ubuntu-latest
@@ -94,5 +94,5 @@ jobs:
           file: agent/Dockerfile
           platforms: linux/amd64, linux/arm64
           push: true
-          # tags: ${{ secrets.DOCKERHUB_USERNAME }}/nezha-agent:latest, ${{ secrets.DOCKERHUB_USERNAME }}/nezha-agent:${{ steps.download.outputs.latest_tag }}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/nezha-agent:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/nezha-agent:latest, ${{ secrets.DOCKERHUB_USERNAME }}/nezha-agent:${{ steps.download.outputs.latest_tag }}
+          #tags: ${{ secrets.DOCKERHUB_USERNAME }}/nezha-agent:latest
