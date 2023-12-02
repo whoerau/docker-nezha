@@ -8,10 +8,10 @@ ARG VERSION
 ARG TARGETARCH
 WORKDIR /home
 
-RUN git clone https://github.com/naiba/nezha.git &&\
-    cd nezha && VERSION=$(git describe --tags `git rev-list --tags --max-count=1`) &&\
+RUN git clone https://github.com/nezhahq/agent.git &&\
+    cd agent && VERSION=$(git describe --tags `git rev-list --tags --max-count=1`) &&\
     git checkout $VERSION &&\
-    cd cmd/agent && go build -o nezha-agent -trimpath -ldflags="-s -w -X main.version=${VERSION:1} -X main.arch=${TARGETARCH}"
+    go build -o nezha-agent -trimpath -ldflags="-s -w -X main.version=${VERSION:1} -X main.arch=${TARGETARCH}"
 
 
 FROM alpine:latest
