@@ -1,6 +1,6 @@
 FROM golang:alpine AS binarybuilder
 RUN apk --no-cache --no-progress add \
-    gcc git musl-dev
+    gcc git musl-dev sqlite-dev
 
 ENV GO111MODULE=on
 
