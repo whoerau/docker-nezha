@@ -1,4 +1,4 @@
-FROM golang:alpine AS binarybuilder
+FROM golang:alpine3.18 AS binarybuilder
 RUN apk --no-cache --no-progress add \
     gcc git musl-dev sqlite-dev
 
