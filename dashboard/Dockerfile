@@ -13,7 +13,7 @@ RUN git clone https://github.com/naiba/nezha.git && \
 #   cd cmd/dashboard && go build -o app -trimpath -ldflags="-s -w -X main.version=latest"
 
 
-FROM alpine:latest
+FROM alpine:3.19
 
 RUN apk --no-cache --no-progress add \
     ca-certificates \
