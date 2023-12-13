@@ -14,7 +14,7 @@ RUN git clone https://github.com/nezhahq/agent.git &&\
     go build -o nezha-agent -trimpath -ldflags="-s -w -X main.version=${VERSION:1} -X main.arch=${TARGETARCH}"
 
 
-FROM alpine:latest
+FROM alpine:3.19
 
 RUN apk --no-cache --no-progress add \
     ca-certificates \
