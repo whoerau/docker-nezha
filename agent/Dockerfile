@@ -23,7 +23,7 @@ ENV TZ="Asia/Shanghai"
 RUN cp "/usr/share/zoneinfo/$TZ" /etc/localtime && echo "$TZ" > /etc/timezone 
 
 WORKDIR /agent
-COPY --from=binarybuilder /home/agent/nezha-agent ./nezha-agent
+COPY --from=binarybuilder /home/agent/cmd/agent/nezha-agent ./nezha-agent
 
 # USER nobody
 
