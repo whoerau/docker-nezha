@@ -11,7 +11,7 @@ WORKDIR /home
 RUN git clone https://github.com/nezhahq/agent.git &&\
     cd agent && VERSION=$(git describe --tags `git rev-list --tags --max-count=1`) &&\
     git checkout $VERSION &&\
-    cd cmd && go build -o nezha-agent -trimpath -ldflags="-s -w -X main.version=${VERSION:1} -X main.arch=${TARGETARCH}"
+    cd cmd/agent && go build -o nezha-agent -trimpath -ldflags="-s -w -X main.version=${VERSION:1} -X main.arch=${TARGETARCH}"
 
 
 FROM alpine:3.19
