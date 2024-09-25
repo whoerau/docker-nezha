@@ -1,4 +1,4 @@
-FROM golang:alpine3.18 AS binarybuilder
+FROM golang:alpine3.20 AS binarybuilder
 RUN apk --no-cache --no-progress add \
     gcc git musl-dev
 
@@ -14,7 +14,7 @@ RUN git clone https://github.com/nezhahq/agent.git &&\
     cd cmd/agent && go build -o nezha-agent -trimpath -ldflags="-s -w -X main.version=${VERSION:1} -X main.arch=${TARGETARCH}"
 
 
-FROM alpine:3.19
+FROM alpine:3.20
 
 RUN apk --no-cache --no-progress add \
     ca-certificates \
