@@ -1,4 +1,4 @@
-FROM golang:alpine3.20 AS binarybuilder
+FROM golang:alpine3.19 AS binarybuilder
 RUN apk --no-cache --no-progress add \
     gcc git musl-dev sqlite-dev
 
@@ -7,13 +7,13 @@ ENV GO111MODULE=on
 WORKDIR /home
 RUN git clone https://github.com/naiba/nezha.git && \
   cd nezha && latestTag=$(git describe --tags `git rev-list --tags --max-count=1`) && git checkout $latestTag && \
-  cd cmd/dashboard && go build -o app -trimpath -ldflags="-s -w -X main.version=${latestTag:1} -X github.com/naiba/nezha/service/singleton.Version=${latestTag:1} --extldflags '-static -fpic' " 
+  cd cmd/dashboard && gomod tidy && go build -o app -trimpath -ldflags="-s -w -X main.version=${latestTag:1} -X github.com/naiba/nezha/service/singleton.Version=${latestTag:1} --extldflags '-static -fpic' " 
 # RUN git clone https://github.com/naiba/nezha.git && \
 #   cd nezha && \
 #   cd cmd/dashboard && go build -o app -trimpath -ldflags="-s -w -X main.version=latest -X github.com/naiba/nezha/service/singleton.Version=${latestTag:1}"
 
 
-FROM alpine:3.20
+FROM alpine:3.19
 
 RUN apk --no-cache --no-progress add \
     ca-certificates \
