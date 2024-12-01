@@ -27,4 +27,4 @@ COPY --from=binarybuilder /home/agent/cmd/agent/nezha-agent ./nezha-agent
 
 # USER nobody
 
-ENTRYPOINT ["/agent/nezha-agent", "--skip-procs", "--disable-command-execute", "--report-delay", "2"]
+ENTRYPOINT ["/agent/nezha-agent", "--disable-command-execute", "--report-delay", "2"]
