@@ -7,7 +7,7 @@ ENV GO111MODULE=on
 WORKDIR /home
 RUN git clone https://github.com/nezhahq/nezha.git && \
   cd nezha && latestTag=$(git describe --tags `git rev-list --tags --max-count=1`) && git checkout $latestTag && \
-  cd cmd/dashboard && go mod tidy && go build -o app -trimpath -ldflags="-s -w -X main.version=${latestTag:1} -X github.com/nezhahq/nezha/service/singleton.Version=${latestTag:1} --extldflags '-static -fpic' " 
+  go mod tidy && cd cmd/dashboard && go build -o app -trimpath -ldflags="-s -w -X main.version=${latestTag:1} -X github.com/nezhahq/nezha/service/singleton.Version=${latestTag:1} --extldflags '-static -fpic' " 
 # RUN git clone https://github.com/nezhahq/nezha.git && \
 #   cd nezha && \
 #   cd cmd/dashboard && go build -o app -trimpath -ldflags="-s -w -X main.version=latest -X github.com/naiba/nezha/service/singleton.Version=${latestTag:1}"
