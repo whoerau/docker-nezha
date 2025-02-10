@@ -1,6 +1,6 @@
 FROM golang:alpine AS binarybuilder
 RUN apk --no-cache --no-progress add \
-    gcc git musl-dev sqlite-dev
+  gcc git musl-dev sqlite-dev
 
 ENV GO111MODULE=on
 
@@ -16,8 +16,8 @@ RUN git clone https://github.com/nezhahq/nezha.git && \
 FROM alpine:3.19
 
 RUN apk --no-cache --no-progress add \
-    ca-certificates \
-    tzdata
+  ca-certificates \
+  tzdata
 
 ENV TZ="Asia/Shanghai"
 RUN cp "/usr/share/zoneinfo/$TZ" /etc/localtime && echo "$TZ" > /etc/timezone 
